@@ -1,0 +1,98 @@
+{
+  "applications": "*",
+  "changelogDate": "20231026145455",
+  "dto": "mapstruct",
+  "entityTableName": "students",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dob",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "classLevel",
+      "fieldType": "ClassType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "GRADE_1,GRADE_2,GRADE_3,GRADE_4,GRADE_5"
+    },
+    {
+      "fieldName": "profileImageUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "homeAddress",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "longitude",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "latitude",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "billingStatus",
+      "fieldType": "BillingStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "ACTIVE,OVERDUE"
+    },
+    {
+      "fieldName": "nextBillingCycle",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "entityStatus",
+      "fieldType": "EntityStatus",
+      "fieldValues": "ACTIVE,INACTIVE"
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Students",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "studentTrips",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "studentTrips",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "studentBillings",
+      "otherEntityRelationshipName": "student",
+      "relationshipName": "studentBillings",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "fleet",
+      "relationshipName": "fleet",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "guardians",
+      "relationshipName": "guardian",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

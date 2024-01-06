@@ -1,0 +1,56 @@
+{
+  "applications": "*",
+  "changelogDate": "20231026145655",
+  "dto": "mapstruct",
+  "entityTableName": "trips",
+  "fields": [
+    {
+      "fieldName": "tripType",
+      "fieldType": "TripType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PICKUP,DROPOFF,FIELDTRIP"
+    },
+    {
+      "fieldName": "tripStatus",
+      "fieldType": "TripStatus",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "STARTED,ONGOING,COMPLETED"
+    },
+    {
+      "fieldName": "startTime",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "endTime",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "entityStatus",
+      "fieldType": "EntityStatus",
+      "fieldValues": "ACTIVE,INACTIVE"
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Trips",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "studentTrips",
+      "otherEntityRelationshipName": "trip",
+      "relationshipName": "studentTrips",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

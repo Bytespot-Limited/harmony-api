@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20231026144955",
+  "dto": "mapstruct",
+  "entityTableName": "student_billings",
+  "fields": [
+    {
+      "fieldName": "paymentChannel",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "paymentReference",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "subscriptionStart",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "subscriptionEnd",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "StudentBillings",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "students",
+      "relationshipName": "student",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

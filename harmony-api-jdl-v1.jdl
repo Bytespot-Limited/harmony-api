@@ -1,0 +1,242 @@
+enum EntityStatus {
+    ACTIVE,
+    INACTIVE
+}
+
+enum VehicleType {
+    BUS,
+    VAN
+}
+
+enum DeviceStatus {
+    ONLINE,
+    OFFLINE
+}
+
+enum DriverAssignmentStatus {
+    ASSIGNED,
+    UNASSIGNED
+}
+
+enum ClassType {
+    GRADE_1,
+    GRADE_2,
+    GRADE_3,
+    GRADE_4,
+    GRADE_5
+}
+
+enum BillingStatus {
+    ACTIVE,
+    OVERDUE
+}
+
+enum GuardianRelationshipType {
+    FATHER,
+    MOTHER,
+    BROTHER,
+    SISTER,
+    GUARDIAN
+}
+
+enum BoardingStatus {
+    BOARDED,
+    DROPPED_OFF
+}
+
+
+enum TripType {
+    PICKUP,
+    DROPOFF,
+    FIELDTRIP
+}
+
+enum TripStatus {
+    STARTED,
+    ONGOING,
+    COMPLETED
+}
+
+enum NotificationChannel {
+    SMS,
+    EMAIL
+}
+
+enum NotificationStatus {
+    SENT,
+    DELIVERED,
+    PENDING
+}
+
+
+
+
+entity Schools {
+    name String required,
+    location String required,
+    logoImageUrl String,
+    emailAddress String required unique,
+    phoneNumber String required unique
+    entityStatus EntityStatus,
+    creationDate Instant
+    modifiedDate Instant
+}
+
+entity SchoolStaff {
+    userId Integer required,
+    name String required,
+    roleDescription String required,
+    dob LocalDate required,
+    nationalId String required unique,
+    profileImageUrl String,
+    emailAddress String required unique,
+    phoneNumber String required unique,
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+
+}
+
+entity Fleet {
+    numberPlate String required unique,
+    vehicleType VehicleType required,
+
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+}
+
+entity Terminal {
+    devideId String required unique,
+    phoneNumber String unique,
+    manufacturer String required,
+    model String required,
+    lastPing Instant,
+    longitude String,
+    latitude String,
+    status DeviceStatus,
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+
+}
+
+
+entity Drivers {
+    userId Integer,
+    name String required,
+    dob LocalDate required,
+    nationalId String required unique,
+    profileImageUrl String,
+    emailAddress String required unique,
+    phoneNumber String required unique,
+    assignmentStatus DriverAssignmentStatus required,
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+
+}
+
+entity Students {
+    name String required,
+    dob LocalDate required,
+    classLevel ClassType required,
+    profileImageUrl String,
+    homeAddress String required,
+    longitude String,
+    latitude String,
+    billingStatus BillingStatus required,
+    nextBillingCycle Instant required,
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+
+}
+
+entity Guardians {
+    userId Integer,
+    name String required,
+    dob LocalDate required,
+    nationalId String required unique,
+    profileImageUrl String,
+    guardianType GuardianRelationshipType required,
+    emailAddress String required unique,
+    phoneNumber String required unique,
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+}
+
+entity StudentBillings {
+    paymentChannel String required,
+    paymentReference String required,
+    subscriptionStart Instant,
+    subscriptionEnd Instant
+}
+
+
+
+
+entity Trips {
+    tripType TripType required,
+    tripStatus TripStatus required,
+    startTime Instant required
+    endTime Instant
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+}
+
+entity StudentTrips {
+    status BoardingStatus required,
+    pickupTime Instant,
+    dropOffTime Instant,
+    entityStatus EntityStatus,
+    creationDate Instant,
+    modifiedDate Instant
+}
+
+
+
+entity Notifications {
+    channel NotificationChannel required,
+    channelId String required,
+    message String required,
+    errorMessage String,
+    status NotificationStatus,
+    creationDate Instant
+}
+
+relationship OneToMany {
+    Schools to Fleet{school}
+    Fleet to Drivers{fleet}
+    Fleet to Students{fleet}
+
+    Guardians to Students{guardian}
+    Students to StudentTrips{student}
+
+    Trips to StudentTrips{trip}
+
+    Students to StudentBillings{student}
+}
+
+relationship OneToOne {
+    Fleet{terminal} to Terminal
+
+}
+
+// Set pagination options
+paginate * with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service * with serviceImpl
+
+// Add filters to the entities
+filter *
+
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

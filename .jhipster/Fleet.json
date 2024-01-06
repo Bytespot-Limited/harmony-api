@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20231026145155",
+  "dto": "mapstruct",
+  "entityTableName": "fleet",
+  "fields": [
+    {
+      "fieldName": "numberPlate",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "unique"]
+    },
+    {
+      "fieldName": "vehicleType",
+      "fieldType": "VehicleType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "BUS,VAN"
+    },
+    {
+      "fieldName": "entityStatus",
+      "fieldType": "EntityStatus",
+      "fieldValues": "ACTIVE,INACTIVE"
+    },
+    {
+      "fieldName": "creationDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "modifiedDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "jpaMetamodelFiltering": true,
+  "name": "Fleet",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "terminal",
+      "relationshipName": "terminal",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "drivers",
+      "otherEntityRelationshipName": "fleet",
+      "relationshipName": "drivers",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "students",
+      "otherEntityRelationshipName": "fleet",
+      "relationshipName": "students",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "schools",
+      "relationshipName": "school",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceImpl"
+}

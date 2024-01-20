@@ -50,7 +50,8 @@ public class WebConfigurer implements ServletContextInitializer {
   public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = jHipsterProperties.getCors();
-    config.setAllowedOrigins(Arrays.asList("http://localhost:4200/"));
+    config.setAllowedOrigins(
+        Arrays.asList("http://localhost:4200/", "https://harmony-system.uk.r.appspot.com/"));
     config.addAllowedMethod("*"); // Allow all HTTP methods (GET, POST, etc.)
     config.addAllowedHeader("*"); // Allow all headers
 

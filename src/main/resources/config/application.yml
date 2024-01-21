@@ -209,7 +209,7 @@ jhipster:
 # ===================================================================
 
 # application:
-app-url: https://harmony-dashboard.localto.net/apps/
+app-url: https://harmony-system.uk.r.appspot.com/apps/
 sms:
-  username: ${SMS_USERNAME}
-  api-key: ${SMS_API_KEY}
+  username: ${SMS_USERNAME:harmony-app}
+  api-key: ${SMS_API_KEY:10aed2318c0a6661806b82c0099ca8b78abdbef63563d5d70969b59c30082562}
